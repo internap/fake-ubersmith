@@ -20,7 +20,7 @@ from flask import request, Flask
 
 class FlaskServer(threading.Thread):
     def __init__(self, name, port=9124, *args, **kwargs):
-        threading.Thread.__init__(self, *args, **kwargs)
+        super(FlaskServer).__init__(*args, **kwargs)
 
         self.server = Flask(name)
         self.port = port
@@ -28,7 +28,7 @@ class FlaskServer(threading.Thread):
         self.server.add_url_rule('/__shutdown', view_func=shutdown)
 
     def run(self):
-        self.server.run(port=self.port)
+        self.server.run(host="0.0.0.0", port=self.port)
 
     def stop(self):
         requests.get('http://localhost:{0}/__shutdown'.format(self.port))
