@@ -1,0 +1,7 @@
+version: '2'
+services:
+  app:
+    container_name: "fake-ubersmith"
+    image: {docker_image}
+    ports:
+      - "8000:9131"
